@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyf.mappers.mappers.BalanceMacMapper">
+
+    <insert id="insertBalanceMac">
+        INSERT
+        IGNORE into `sn_mac_s7p`
+        (`order_number`, `sn_number`, `mac`, `create_time`, `type`)
+        VALUES
+        <foreach collection="dataSets" item="model" separator=",">
+            (
+            #{model.orderNumber,jdbcType=BIGINT},
+            #{model.snNumber,jdbcType=VARCHAR},
+            #{model.mac,jdbcType=VARCHAR},
+            #{model.createTime,jdbcType=TIMESTAMP},
+            #{model.type,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+</mapper>

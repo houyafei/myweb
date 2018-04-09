@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <!--启用spring的一些annotation -->
+    <context:annotation-config/>
+
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器(需要自己配置) -->
+    <context:component-scan base-package="hyf.conversion.controllers"/>
+
+    <!--装配自定义的类型转换器-->
+    <mvc:annotation-driven />
+    <bean id="userValidator" class="hyf.conversion.beans.UserValidator"/>
+
+    <mvc:default-servlet-handler/>
+
+
+    <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用html-->
+    <!-- 默认的视图解析器在上边的解析错误时使用 (默认使用html)- -->
+    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--设置JSP文件的目录位置-->
+        <property name="prefix" value="/WEB-INF/contents/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>

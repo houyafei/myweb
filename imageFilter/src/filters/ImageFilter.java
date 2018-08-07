@@ -27,7 +27,7 @@ public class ImageFilter implements Filter {
         String reference = httpServletRequest.getHeader("referer");
         System.out.println("hearder reference ="+reference);
         if (reference==null || "".equals(reference)){
-            throw new ServletException("the resourcenot available");
+            throw new ServletException("the resource not available");
         }else {
             filterChain.doFilter(servletRequest,servletResponse);
         }
